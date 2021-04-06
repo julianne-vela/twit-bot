@@ -1,4 +1,4 @@
-# twitter-toxicity
+# twitter-bot (may not use toxicity model?)
 
 ### APP PLAN
 
