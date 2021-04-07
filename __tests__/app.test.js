@@ -9,13 +9,17 @@ describe('twit-bot CRUD routes', () => {
 	});
 
 	it('takes in a username and adds a new user to the DB', async () => {
-		const res = await request(app)
-			.post('/api/v1/users')
-			.send({ userName: 'NessimaSkye' });
+		const newUser = {
+			userName: 'NessimaSkye',
+		};
 
-		expect(res.body).toEqual({
+		const { body } = await request(app).post('/api/v1/users').send(newUser);
+
+		console.log(body);
+
+		expect(body).toEqual({
 			id: expect.any(String),
-			user_name: 'NessimaSkye',
+			...newUser,
 		});
 	});
 });
