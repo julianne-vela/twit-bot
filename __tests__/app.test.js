@@ -97,4 +97,27 @@ describe('twit-bot Tweet CRRUD routes', () => {
 			},
 		]);
 	});
+
+	it('GET: returns all tweets for a specific user', async () => {
+		const secondTweet = {
+			tweet: 'This is my second tweet',
+			linkedUser: '1',
+		};
+		await request(app).post('/api/v1/tweets/create').send(secondTweet);
+
+		const { body } = await request(app).get('/api/v1/tweets/1');
+
+		expect(body).toEqual([
+			{
+				id: '1',
+				tweet: 'This is my first tweet',
+				linkedUser: '1',
+			},
+			{
+				id: '2',
+				tweet: 'This is my second tweet',
+				linkedUser: '1',
+			},
+		]);
+	});
 });
