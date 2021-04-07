@@ -144,7 +144,7 @@ describe('twit-bot Tweet CRRUD routes', () => {
 		};
 
 		const { body } = await request(app)
-			.put('/api/v1/tweets/update')
+			.put('/api/v1/tweets/update/1')
 			.send(updatedTweet);
 
 		expect(body).toEqual({
