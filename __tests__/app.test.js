@@ -120,4 +120,21 @@ describe('twit-bot Tweet CRRUD routes', () => {
 			},
 		]);
 	});
+
+	it('POST: adds a new tweet to the DB', async (req, res, next) => {
+		const newTweet = {
+			tweet: 'This is a new tweet',
+			linkedUser: '1',
+		};
+
+		const { body } = await request(app)
+			.post('/api/v1/tweets/create')
+			.send(newTweet);
+
+		expect(body).toEqual({
+			id: expect.any(String),
+			tweet: 'This is a new tweet',
+			linkedUser: '1',
+		});
+	});
 });
