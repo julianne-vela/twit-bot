@@ -137,19 +137,32 @@ describe('twit-bot Tweet CRRUD routes', () => {
 		});
 	});
 
-	it('PUT: updates a tweet within the DB', async () => {
+	it.skip('PUT: updates a tweet within the DB', async () => {
 		const updatedTweet = {
 			tweet: 'this is my UPDATED tweet',
 			linkedUser: '1',
 		};
 
 		const { body } = await request(app)
-			.put('/api/v1/tweets/update/1')
+			.put('/api/v1/tweets/1')
 			.send(updatedTweet);
 
 		expect(body).toEqual({
 			id: '1',
 			...updatedTweet,
+		});
+	});
+
+	it('DELETE: removes a tweet from the DB', async () => {
+		const deletedTweet = {
+			id: '1',
+			tweet: 'this is my first tweet',
+			linkedUser: '1',
+		};
+
+		expect(body).toEqual({
+			details: 'Tweet removed successfully',
+			data: deletedTweet,
 		});
 	});
 });
