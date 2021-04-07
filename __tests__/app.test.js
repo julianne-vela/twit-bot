@@ -15,11 +15,20 @@ describe('twit-bot CRUD routes', () => {
 
 		const { body } = await request(app).post('/api/v1/users').send(newUser);
 
-		console.log(body);
-
 		expect(body).toEqual({
 			id: expect.any(String),
 			...newUser,
 		});
+	});
+
+	it('returns all users in the DB', async () => {
+		const { body } = await request(app).get('api/v1/users');
+
+		expect(body).toEqual([
+			{
+				id: expect.any(String),
+				userName: 'NessimaSkye',
+			},
+		]);
 	});
 });
