@@ -3,26 +3,32 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-describe('twit-bot CRUD routes', () => {
+describe('twit-bot CRRUD routes', () => {
 	beforeEach(() => {
 		return setup(pool);
 	});
 
-	it('takes in a username and adds a new user to the DB', async () => {
+	beforeEach(async () => {
 		const newUser = {
 			userName: 'NessimaSkye',
 		};
 
-		const { body } = await request(app).post('/api/v1/users').send(newUser);
+		await request(app).post('/api/v1/users').send(newUser);
+	});
+
+	it('adds a new user to the DB', async () => {
+		const { body } = await request(app)
+			.post('/api/v1/users')
+			.send({ userName: 'TunaBoatTony' });
 
 		expect(body).toEqual({
 			id: expect.any(String),
-			...newUser,
+			userName: 'TunaBoatTony',
 		});
 	});
 
 	it('returns all users in the DB', async () => {
-		const { body } = await request(app).get('api/v1/users');
+		const { body } = await request(app).get('/api/v1/users');
 
 		expect(body).toEqual([
 			{
