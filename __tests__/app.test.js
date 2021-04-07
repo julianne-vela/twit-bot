@@ -160,6 +160,8 @@ describe('twit-bot Tweet CRRUD routes', () => {
 			linkedUser: '1',
 		};
 
+		const { body } = await request(app).delete('/api/v1/tweets/1');
+
 		expect(body).toEqual({
 			details: 'Tweet removed successfully',
 			data: deletedTweet,
