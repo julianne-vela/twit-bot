@@ -83,7 +83,7 @@ describe('twit-bot Tweet CRRUD routes', () => {
 		};
 
 		await request(app).post('/api/v1/users').send(newUser);
-		await request(app).post('/api/v1/tweets').send(newTweet);
+		await request(app).post('/api/v1/tweets/create').send(newTweet);
 	});
 
 	it('GET: returns all tweets in the DB', async () => {
