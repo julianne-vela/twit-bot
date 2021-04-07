@@ -137,7 +137,7 @@ describe('twit-bot Tweet CRRUD routes', () => {
 		});
 	});
 
-	it.skip('PUT: updates a tweet within the DB', async () => {
+	it('PUT: updates a tweet within the DB', async () => {
 		const updatedTweet = {
 			tweet: 'this is my UPDATED tweet',
 			linkedUser: '1',
@@ -148,8 +148,11 @@ describe('twit-bot Tweet CRRUD routes', () => {
 			.send(updatedTweet);
 
 		expect(body).toEqual({
-			id: '1',
-			...updatedTweet,
+			details: 'Tweet updated successfully in Database',
+			data: {
+				...updatedTweet,
+				id: '1',
+			},
 		});
 	});
 
