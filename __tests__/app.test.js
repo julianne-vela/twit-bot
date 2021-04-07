@@ -131,11 +131,25 @@ describe('twit-bot Tweet CRRUD routes', () => {
 			.post('/api/v1/tweets/create')
 			.send(newTweet);
 
-		console.log(body);
-
 		expect(body).toEqual({
 			details: 'New Tweet added Successfully!',
 			data: { ...newTweet, id: expect.any(String) },
+		});
+	});
+
+	it('PUT: updates a tweet within the DB', async () => {
+		const updatedTweet = {
+			tweet: 'this is my UPDATED tweet',
+			linkedUser: '1',
+		};
+
+		const { body } = await request(app)
+			.put('/api/v1/tweets/update')
+			.send(updatedTweet);
+
+		expect(body).toEqual({
+			id: '1',
+			...updatedTweet,
 		});
 	});
 });
