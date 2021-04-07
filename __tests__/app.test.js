@@ -13,12 +13,12 @@ describe('twit-bot User CRRUD routes', () => {
 			userName: 'NessimaSkye',
 		};
 
-		await request(app).post('/api/v1/users').send(newUser);
+		await request(app).post('/api/v1/users/add-user').send(newUser);
 	});
 
 	it('POST: adds a new user to the DB', async () => {
 		const { body } = await request(app)
-			.post('/api/v1/users')
+			.post('/api/v1/users/add-user')
 			.send({ userName: 'TunaBoatTony' });
 
 		expect(body).toEqual({
@@ -82,7 +82,7 @@ describe('twit-bot Tweet CRRUD routes', () => {
 			linkedUser: '1',
 		};
 
-		await request(app).post('/api/v1/users').send(newUser);
+		await request(app).post('/api/v1/users/add-user').send(newUser);
 		await request(app).post('/api/v1/tweets/create').send(newTweet);
 	});
 
@@ -121,7 +121,7 @@ describe('twit-bot Tweet CRRUD routes', () => {
 		]);
 	});
 
-	it('POST: adds a new tweet to the DB', async (req, res, next) => {
+	it('POST: adds a new tweet to the DB', async () => {
 		const newTweet = {
 			tweet: 'This is a new tweet',
 			linkedUser: '1',
@@ -131,10 +131,11 @@ describe('twit-bot Tweet CRRUD routes', () => {
 			.post('/api/v1/tweets/create')
 			.send(newTweet);
 
+		console.log(body);
+
 		expect(body).toEqual({
-			id: expect.any(String),
-			tweet: 'This is a new tweet',
-			linkedUser: '1',
+			details: 'New Tweet added Successfully!',
+			data: { ...newTweet, id: expect.any(String) },
 		});
 	});
 });
