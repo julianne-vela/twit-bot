@@ -156,7 +156,7 @@ describe('twit-bot Tweet CRRUD routes', () => {
 	it('DELETE: removes a tweet from the DB', async () => {
 		const deletedTweet = {
 			id: '1',
-			tweet: 'this is my first tweet',
+			tweet: 'This is my first tweet',
 			linkedUser: '1',
 		};
 
