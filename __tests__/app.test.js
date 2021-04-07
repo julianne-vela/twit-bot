@@ -57,4 +57,13 @@ describe('twit-bot CRRUD routes', () => {
 			userName: 'TunaBoatTony',
 		});
 	});
+
+	it('DELETE: deletes a user from the DB with the given ID', async () => {
+		const { body } = await request(app).delete('/api/v1/users/1');
+
+		expect(body).toEqual({
+			id: '1',
+			userName: 'NessimaSkye',
+		});
+	});
 });
