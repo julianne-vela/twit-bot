@@ -16,7 +16,7 @@ describe('twit-bot CRRUD routes', () => {
 		await request(app).post('/api/v1/users').send(newUser);
 	});
 
-	it('adds a new user to the DB', async () => {
+	it('POST: adds a new user to the DB', async () => {
 		const { body } = await request(app)
 			.post('/api/v1/users')
 			.send({ userName: 'TunaBoatTony' });
@@ -27,7 +27,7 @@ describe('twit-bot CRRUD routes', () => {
 		});
 	});
 
-	it('returns all users in the DB', async () => {
+	it('GET: returns all users in the DB', async () => {
 		const { body } = await request(app).get('/api/v1/users');
 
 		expect(body).toEqual([
@@ -36,5 +36,14 @@ describe('twit-bot CRRUD routes', () => {
 				userName: 'NessimaSkye',
 			},
 		]);
+	});
+
+	it('GET BY ID: returns a single user with the given ID', async () => {
+		const { body } = await request(app).get('/api/v1/users/1');
+
+		expect(body).toEqual({
+			id: '1',
+			userName: 'NessimaSkye',
+		});
 	});
 });
