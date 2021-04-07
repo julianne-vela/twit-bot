@@ -46,4 +46,19 @@ describe('twit-bot CRRUD routes', () => {
 			userName: 'NessimaSkye',
 		});
 	});
+
+	it('PUT: updates an existing user in the DB', async () => {
+		const updatedUser = {
+			userName: 'TunaBoatTony',
+		};
+
+		const { body } = await request(app)
+			.put('/api/v1/users/1')
+			.send(updatedUser);
+
+		expect(body).toEqual({
+			id: '1',
+			userName: 'TunaBoatTony',
+		});
+	});
 });
